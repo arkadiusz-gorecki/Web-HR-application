@@ -1,0 +1,34 @@
+﻿@model Company
+
+
+@{
+    ViewData["Title"] = "Company details";
+}
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+
+<div style="font-size:50px; margin-top:10px">
+    <a data-toggle="tooltip" title="Go back to lsit of companies" href="@Url.Action("Index", "Company")">
+        <i class="glyphicon glyphicon-arrow-left"></i>
+    </a>
+</div>
+
+<div>
+    @Html.AntiForgeryToken()
+    <h1 style="margin-top:0px">@Model.Name</h1>
+    <div class="table-bordered" style="border:1px solid black">
+        <div style="margin:30px">
+            <h3>Job offers from this company:</h3>
+            @foreach (JobOffer jo in @Model.JobOffers)
+            {
+                <li>@Html.ActionLink(jo.JobTitle, "Details", "JobOffer", new { id = jo.Id })</li>
+            }
+        </div>
+    </div>
+    <div style="margin-top:30px">
+        <input type="button" class="btn btn-primary" value="Edit" onclick="@("window.location.href='" + @Url.Action("Edit", "Company", new { id = Model.Id }) + "'");" />
+        <input type="button" class="btn btn-primary btn-danger" value="Delete" onclick="@("window.location.href='" + @Url.Action("Delete", "Company", new { id = Model.Id }) + "'");" />
+    </div>
+
+</div>

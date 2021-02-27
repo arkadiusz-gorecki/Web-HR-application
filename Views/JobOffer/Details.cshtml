@@ -1,0 +1,59 @@
+﻿@model JobOffer
+
+@{
+    ViewData["Title"] = "Job offer details";
+}
+
+<div style="font-size:50px; margin-top:10px">
+    <a data-toggle="tooltip" title="Go back to list of job offers" href="@Url.Action("Index", "JobOffer")">
+        <i class="glyphicon glyphicon-arrow-left"></i>
+    </a>
+</div>
+
+<div>
+    @Html.AntiForgeryToken()
+    <h1 style="margin-top:0px">Job offer details</h1>
+    <div class="table-bordered" style="border:1px solid black">
+        <div style="margin:30px">
+            <label>Job: @Model.JobTitle</label>
+            <div>
+                <label>Salary: @Model.SalaryFrom - @Model.SalaryTo</label>
+            </div>
+            <div>
+                <label>Created: @Model.Created</label>
+            </div>
+            <div>
+                <label>Location: @Model.Location</label>
+            </div>
+            <div>
+                <label>Company: @Html.ActionLink(Model.Company.Name, "Details", "Company", new { id = Model.CompanyId })</label>
+            </div>
+            <div>
+                <label>Description: @Model.Description</label>
+            </div>
+            <div>
+                <label>Valid until: @Model.ValidUntil</label>
+            </div>
+        </div>
+    </div>
+    <div style="margin-top:30px">
+        <input type="button" class="btn btn-primary" value="Apply" onclick="@("window.location.href='" + @Url.Action("Apply", "JobApplication", new { id = Model.Id }) + "'");" />
+        <input type="button" class="btn btn-primary" value="Edit" onclick="@("window.location.href='" + @Url.Action("Edit", "JobOffer", new { id = Model.Id }) + "'");" />
+        <input type="button" class="btn btn-primary btn-danger" value="Delete" onclick="@("window.location.href='" + @Url.Action("Delete", "JobOffer", new { id = Model.Id }) + "'");" />
+    </div>
+    <hr style="border:0.5px solid black"/>
+    <div>
+        <h2>Applications for this job</h2>
+        <div class="table-bordered" style="padding-top:7px; border:1px solid black">
+            <ul>
+                @foreach (JobApplication ja in Model.JobApplications)
+                {
+                    <div>
+                        <li>@Html.ActionLink(ja.FirstName + " " + ja.LastName, "Details", "JobApplication", new { id = ja.Id })</li>
+                    </div>
+                }
+            </ul>
+        </div>
+    </div>
+
+</div>

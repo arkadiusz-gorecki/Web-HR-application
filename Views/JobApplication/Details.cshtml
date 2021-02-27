@@ -1,0 +1,45 @@
+﻿@model JobApplication
+
+@{
+    ViewData["Title"] = "Job application details";
+    string JobTitle = ViewBag.JobTitle;
+}
+
+<div style="font-size:50px; margin-top:10px">
+    <a data-toggle="tooltip" title="Go back to job offer" href="@Url.Action("Details", "JobOffer", new { id = Model.JobOfferId })">
+        <i class="glyphicon glyphicon-arrow-left"></i>
+    </a>
+</div>
+
+<div>
+    @Html.AntiForgeryToken()
+    <h1 style="margin-top:0px">Job application details</h1>
+    <div class="table-bordered" style="border:1px solid black">
+        <div style="margin:30px">
+            <label>Job: @JobTitle</label>
+            <div>
+                <label>First name: @Model.FirstName</label>
+            </div>
+            <div>
+                <label>Last Name: @Model.LastName</label>
+            </div>
+            <div>
+                <label>Phone number: @Model.PhoneNumber</label>
+            </div>
+            <div>
+                <label>Email: @Model.EmailAddress</label>
+            </div>
+            <div>
+                <label>Contact Agreement: @Model.ContactAgreement</label>
+            </div>
+            <div>
+                <label>CvUrl: @Model.CvUrl</label>
+            </div>
+        </div>
+    </div>
+    <div style="margin-top:30px">
+        <input type="button" class="btn btn-primary" value="Edit" onclick="@("window.location.href='" + @Url.Action("Edit", "JobApplication", new { id = Model.Id }) + "'");" />
+        <input type="button" class="btn btn-primary btn-danger" value="Delete" onclick="@("window.location.href='" + @Url.Action("Delete", "JobApplication", new { id = Model.Id }) + "'");" />
+    </div>
+
+</div>

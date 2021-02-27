@@ -1,0 +1,26 @@
+﻿@model List<Company>
+
+@{
+    ViewData["Title"] = "Companies";
+}
+
+<div style="font-size:50px; margin-top:10px">
+    <a data-toggle="tooltip" title="Go back to home page" href="@Url.Action("Index", "Home")">
+        <i class="glyphicon glyphicon-arrow-left"></i>
+    </a>
+</div>
+
+<div>
+    <h1 style="margin-top:0px">Companies</h1>
+    <div class="table-bordered" style="padding-top:7px; border:1px solid black">
+        <ul>
+            @foreach (Company c in @Model)
+            {
+                <li>@Html.ActionLink(c.Name, "Details", new { id = c.Id })</li>
+            }
+        </ul>
+    </div>
+    <div style="margin-top:30px">
+        <input type="button" class="btn btn-primary" value="Add company" onclick="@("window.location.href='" + @Url.Action("Add", "Company") + "'");" />
+    </div>
+</div>

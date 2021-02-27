@@ -1,0 +1,37 @@
+﻿@model Company
+
+@{
+    ViewData["Title"] = "Add new company";
+}
+@*<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>*@
+
+<div style="font-size:50px; margin-top:10px">
+    <a data-toggle="tooltip" title="Go back to list of companies" href="@Url.Action("Index", "Company")">
+        <i class="glyphicon glyphicon-arrow-left"></i>
+    </a>
+</div>
+
+<div>
+    <h1 style="margin-top:0px">Add company</h1>
+    <div class="table-bordered" style="border:1px solid black">
+        <div style="margin:30px">
+            @using (Html.BeginForm("Add"))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    <label>Company name</label>
+                    @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger " })
+                </div>
+
+                <div style="margin-top:30px">
+                    @*<button type="submit" class="btn btn-primary">Add</button>*@
+                    <button type="button" class="btn btn-primary" onclick="sendCompany();">Add</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

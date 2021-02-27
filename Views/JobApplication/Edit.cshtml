@@ -1,0 +1,63 @@
+﻿@model JobApplication
+
+@{
+    ViewData["Title"] = "Edit your job application";
+    string JobTitle = @ViewBag.JobTitle;
+}
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+
+<div style="font-size:50px; margin-top:10px">
+    <a data-toggle="tooltip" title="Go back to job application details" href="@Url.Action("Details", "JobApplication", new { id = Model.Id })">
+        <i class="glyphicon glyphicon-arrow-left"></i>
+    </a>
+</div>
+
+<div>
+    <h1 style="margin-top:0px">Edit your job application</h1>
+    <hr  style="border:0.5px solid black"/>
+    <h1>@JobTitle</h1>
+    <div class="table-bordered" style="border:1px solid black">
+        <div style="margin:30px">
+            @using (Html.BeginForm("Edit"))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(m => m.JobOfferId)
+                <label>First name</label>
+                <div>
+                    @Html.EditorFor(m => m.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger " })
+                </div>
+                <label>Last name</label>
+                <div>
+                    @Html.EditorFor(m => m.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger " })
+                </div>
+                <label>Email</label>
+                <div>
+                    @Html.EditorFor(m => m.EmailAddress, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(m => m.EmailAddress, "", new { @class = "text-danger " })
+                </div>
+                <label>Phone number</label>
+                <div>
+                    @Html.EditorFor(m => m.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger " })
+                </div>
+                <label>Contact agreement</label>
+                <div>
+                    @Html.CheckBoxFor(m => m.ContactAgreement, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <label>Cv link</label>
+                <div>
+                    @Html.EditorFor(m => m.CvUrl, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(m => m.CvUrl, "", new { @class = "text-danger " })
+                </div>
+                <div style="margin-top:30px">
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
